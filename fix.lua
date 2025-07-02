@@ -3009,6 +3009,14 @@ function RayfieldLibrary:CreateWindow(Settings)
 					task.wait()
 					Dropdown.Size = UDim2.new(1, -10, 0, 180)
 					Dropdown.List.Visible = true
+					-- Correction : relancer les animations d'apparition sur chaque option
+					for _, DropdownOpt in ipairs(Dropdown.List:GetChildren()) do
+						if DropdownOpt.ClassName == "Frame" and DropdownOpt.Name ~= "Placeholder" then
+							TweenService:Create(DropdownOpt, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
+							TweenService:Create(DropdownOpt.Title, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+							TweenService:Create(DropdownOpt.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+						end
+					end
 				end
 			end
 
